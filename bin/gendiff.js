@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-console.log('Welcome to gendiff!')
+console.log('Welcome to gendiff!');
