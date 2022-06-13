@@ -3,11 +3,11 @@ import genString from './genString.js';
 
 export default (file1, file2) => {
   let diffString = '{\n';
-  const keis1 = _.keys(file1);
-  const keis2 = _.keys(file2);
-  const assignedKeis = _.sortBy(_.union(keis1, keis2));
-  console.log(assignedKeis);
-  assignedKeis.forEach((key) => {
+  const keys1 = _.keys(file1);
+  const keys2 = _.keys(file2);
+  const keysUnion = _.sortBy(_.union(keys1, keys2));
+  console.log(keysUnion);
+  keysUnion.forEach((key) => {
     const value1 = file1[key];
     const value2 = file2[key];
     if (value1 === value2) {
