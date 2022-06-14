@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import genDiff from '../src/index.js';
-import { differentJsons, equalJsons, emptyJson} from '../__fixtures__/expected.file.js';
+import { differentJsons, equalJsons, emptyJson } from '../__fixtures__/expected.file.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
