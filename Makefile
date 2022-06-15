@@ -1,17 +1,18 @@
 install:
 	npm ci
-
-gendiff:
-	node bin/gendiff.js
-
-publish:
+	npm link
+	
+publish: 
 	npm publish --dry-run
 
-lint:
+lint: 
 	npx eslint .
 
 test:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+	npx -n --experimental-vm-modules jest
 
-test-coverage:
-	NODE_OPTIONS=--experimental-vm-modules npx jest --coverage --coverageProvider=v8
+test-watch:
+	npm test -s -- --watch
+
+test-coverage: # Run coverage tests
+	npm test -- --coverage --coverageProvider=v8
