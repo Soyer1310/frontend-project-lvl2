@@ -11,12 +11,12 @@ export default (file1, file2) => {
     const value2 = file2[key];
     if (value1 === value2) {
       diffString += `   ${genString(key, value1)}`;
-    } else if (Object.hasOwn(file1, key) && Object.hasOwn(file2, key)) {
+    } else if (_.has(file1, key) && _.has(file2, key)) {
       diffString += `  -${genString(key, value1)}`;
       diffString += `  +${genString(key, value2)}`;
-    } else if (Object.hasOwn(file1, key)) {
+    } else if (_.has(file1, key)) {
       diffString += `  -${genString(key, value1)}`;
-    } else if (Object.hasOwn(file2, key)) {
+    } else if (_.has(file2, key)) {
       diffString += `  +${genString(key, value2)}`;
     }
   });
