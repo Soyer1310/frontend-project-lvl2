@@ -1,4 +1,4 @@
-const differentJsons = `{
+const differentFiles = `{
   -follow: false
    host: hexlet.io
   -proxy: 123.234.53.22
@@ -7,13 +7,13 @@ const differentJsons = `{
   +verbose: true
 }`;
 
-const equalJsons = `{
+const equalFiles = `{
    follow: false
    host: hexlet.io
    proxy: 123.234.53.22
    timeout: 50
 }`;
 
-const emptyJson = '{\n}';
+const emptyFiles = '{\n}';
 
-export { differentJsons, equalJsons, emptyJson };
+export { differentFiles, equalFiles, emptyFiles };
