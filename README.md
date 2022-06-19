@@ -8,3 +8,5 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e75034a66dcc2264c1a9/test_coverage)](https://codeclimate.com/github/Soyer1310/frontend-project-lvl2/test_coverage)
 
 [![asciicast](https://asciinema.org/a/fgll99KBgbGVGyxgr2AqCoom6.svg)](https://asciinema.org/a/fgll99KBgbGVGyxgr2AqCoom6)
+
+[![asciicast](https://asciinema.org/a/CG1HHdZgZPCe0g0375a4aOcuF.svg)](https://asciinema.org/a/CG1HHdZgZPCe0g0375a4aOcuF)
