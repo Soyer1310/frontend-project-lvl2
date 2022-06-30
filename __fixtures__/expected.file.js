@@ -1,5 +1,4 @@
-const differentFiles = 
-`{
+const differentFiles = `{
     common: {
       + follow: false
         setting1: Value 1

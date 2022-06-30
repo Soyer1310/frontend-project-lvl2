@@ -21,24 +21,24 @@ describe('JSON tests', () => {
   });
 
   test('gendiff with two empty JSONs', () => {
-    const diff = genDiff(getFixturePath('empty1.json'), getFixturePath('empty2.json'))
+    const diff = genDiff(getFixturePath('empty1.json'), getFixturePath('empty2.json'));
     expect(stylish(diff)).toEqual(emptyFiles);
   });
 });
 
 describe('YAML tests', () => {
   test('gendiff of two defferent flat YAML', () => {
-    const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'))
+    const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'));
     expect(stylish(diff)).toEqual(differentFiles);
   });
 
   test('gendiff with two equal YAML', () => {
-    const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file3.yaml'))
+    const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file3.yaml'));
     expect(stylish(diff)).toEqual(equalFiles);
   });
 
   test('gendiff with two empty YAML', () => {
-    const diff = genDiff(getFixturePath('empty1.yaml'), getFixturePath('empty2.yaml'))
+    const diff = genDiff(getFixturePath('empty1.yaml'), getFixturePath('empty2.yaml'));
     expect(stylish(diff)).toEqual(emptyFiles);
   });
 });

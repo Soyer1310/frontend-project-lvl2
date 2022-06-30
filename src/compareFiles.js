@@ -22,7 +22,7 @@ const compareFiles = (file1, file2) => {
     if (_.has(file1, key) && !_.has(file2, key)) {
       node.type = 'first';
       node.deleted = value1;
-    } else if(!_.has(file1, key) && _.has(file2, key)) {
+    } else if (!_.has(file1, key) && _.has(file2, key)) {
       node.type = 'second';
       node.added = value2;
     }
@@ -31,7 +31,7 @@ const compareFiles = (file1, file2) => {
     }
     result[key] = node;
   });
-    return result;
+  return result;
 };
 
 export default compareFiles;
