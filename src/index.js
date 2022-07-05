@@ -1,7 +1,7 @@
 import readFile from './readFile.js';
 import genPath from './genPath.js';
 import compareFiles from './compareFiles.js';
-import formatted from '../formatters/index.js'
+import formatted from '../formatters/index.js';
 
 export default (filepath1, filepath2, format) => {
   const file1 = readFile(genPath(filepath1));

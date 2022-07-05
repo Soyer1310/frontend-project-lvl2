@@ -3,7 +3,9 @@ import { fileURLToPath } from 'url';
 import genDiff from '../src/index.js';
 import stylish from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
-import { differentFiles, equalFiles, emptyFiles, plainFiles } from '../__fixtures__/expected.file.js';
+import {
+  differentFiles, equalFiles, emptyFiles, plainFiles,
+} from '../__fixtures__/expected.file.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +28,7 @@ describe('JSON tests', () => {
     expect(stylish(diff)).toEqual(emptyFiles);
   });
 
-  test('gendiff with two empty JSONs', () => {
+  test('gendiff JSONs with plain option', () => {
     const diff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
     expect(plain(diff)).toEqual(plainFiles);
   });
@@ -48,7 +50,7 @@ describe('YAML tests', () => {
     expect(stylish(diff)).toEqual(emptyFiles);
   });
 
-  test('gendiff with two empty JSONs', () => {
+  test('gendiff YAML with plain option', () => {
     const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'));
     expect(plain(diff)).toEqual(plainFiles);
   });
