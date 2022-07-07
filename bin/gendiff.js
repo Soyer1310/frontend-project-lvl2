@@ -3,6 +3,7 @@ import { Command } from 'commander';
 import plain from '../formatters/plain.js';
 import genDiff from '../src/index.js';
 import stylish from '../formatters/stylish.js';
+import json from '../formatters/json.js';
 
 const program = new Command();
 let diff;
@@ -23,4 +24,6 @@ if (options.format === 'stylish') {
   console.log(stylish(diff));
 } else if (options.format === 'plain') {
   console.log(plain(diff));
+} else if (options.format === 'json') {
+  console.log(json(diff));
 }
