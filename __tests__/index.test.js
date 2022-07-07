@@ -3,8 +3,9 @@ import { fileURLToPath } from 'url';
 import genDiff from '../src/index.js';
 import stylish from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
+import json from '../formatters/json.js';
 import {
-  differentFiles, equalFiles, emptyFiles, plainFiles,
+  differentFiles, equalFiles, emptyFiles, plainFiles, jsonStr,
 } from '../__fixtures__/expected.file.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -32,6 +33,11 @@ describe('JSON tests', () => {
     const diff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
     expect(plain(diff)).toEqual(plainFiles);
   });
+
+  test('gendiff JSONs with json option', () => {
+    const diff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
+    expect(json(diff)).toEqual(jsonStr);
+  });
 });
 
 describe('YAML tests', () => {
@@ -53,5 +59,10 @@ describe('YAML tests', () => {
   test('gendiff YAML with plain option', () => {
     const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'));
     expect(plain(diff)).toEqual(plainFiles);
+  });
+
+  test('gendiff YAMLs with json option', () => {
+    const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'));
+    expect(json(diff)).toEqual(jsonStr);
   });
 });
