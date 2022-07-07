@@ -82,9 +82,9 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]
 `;
-
+const jsonStr = '{"common":{"type":"different","deleted":{"setting1":"Value 1","setting2":200,"setting3":true,"setting6":{"key":"value","doge":{"wow":""}}},"added":{"follow":false,"setting1":"Value 1","setting3":null,"setting4":"blah blah","setting5":{"key5":"value5"},"setting6":{"key":"value","ops":"vops","doge":{"wow":"so much"}}},"children":{"follow":{"type":"second","added":false},"setting1":{"type":"same","value":"Value 1"},"setting2":{"type":"first","deleted":200},"setting3":{"type":"different","deleted":true,"added":null},"setting4":{"type":"second","added":"blah blah"},"setting5":{"type":"second","added":{"key5":"value5"}},"setting6":{"type":"different","deleted":{"key":"value","doge":{"wow":""}},"added":{"key":"value","ops":"vops","doge":{"wow":"so much"}},"children":{"doge":{"type":"different","deleted":{"wow":""},"added":{"wow":"so much"},"children":{"wow":{"type":"different","deleted":"","added":"so much"}}},"key":{"type":"same","value":"value"},"ops":{"type":"second","added":"vops"}}}}},"group1":{"type":"different","deleted":{"baz":"bas","foo":"bar","nest":{"key":"value"}},"added":{"foo":"bar","baz":"bars","nest":"str"},"children":{"baz":{"type":"different","deleted":"bas","added":"bars"},"foo":{"type":"same","value":"bar"},"nest":{"type":"different","deleted":{"key":"value"},"added":"str"}}},"group2":{"type":"first","deleted":{"abc":12345,"deep":{"id":45}}},"group3":{"type":"second","added":{"deep":{"id":{"number":45}},"fee":100500}}}';
 const emptyFiles = '{\n}';
 
 export {
-  differentFiles, equalFiles, emptyFiles, plainFiles,
+  differentFiles, equalFiles, emptyFiles, plainFiles, jsonStr,
 };
