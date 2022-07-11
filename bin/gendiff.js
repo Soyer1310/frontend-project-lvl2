@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import plain from '../formatters/plain.js';
-import genDiff from '../src/index.js';
-import stylish from '../formatters/stylish.js';
-import json from '../formatters/json.js';
+import genDiff from '../index.js';
 
 const program = new Command();
 let diff;
@@ -14,16 +11,8 @@ program
   .arguments('<filepath1>')
   .arguments('<filepath1>')
   .option('-f, --format <type>', 'output format', 'stylish')
-  .action((filepath1, filepath2) => {
-    diff = genDiff(filepath1, filepath2);
+  .action((filepath1, filepath2, type) => {
+    console.log(genDiff(filepath1, filepath2, type));
   });
 program.parse();
 
-const options = program.opts();
-if (options.format === 'stylish') {
-  console.log(stylish(diff));
-} else if (options.format === 'plain') {
-  console.log(plain(diff));
-} else if (options.format === 'json') {
-  console.log(json(diff));
-}
