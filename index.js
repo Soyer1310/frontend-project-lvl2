@@ -9,7 +9,7 @@ export default (filepath1, filepath2, format) => {
   const file2 = readFile(genPath(filepath2));
   const diff = compareFiles(file1, file2);
   let currentFormat = format;
-  if(format.format) {
+  if(_.isObject(format)) {
     currentFormat = format.format;
   }
   const formatedDiff = formatted(diff, currentFormat);

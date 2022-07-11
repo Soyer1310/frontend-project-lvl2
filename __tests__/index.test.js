@@ -1,9 +1,9 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import genDiff from '../src/index.js';
-import stylish from '../formatters/stylish.js';
-import plain from '../formatters/plain.js';
-import json from '../formatters/json.js';
+import genDiff from '../index.js';
+import stylish from '../src/formatters/stylish.js';
+import plain from '../src/formatters/plain.js';
+import json from '../src/formatters/json.js';
 import {
   differentFiles, equalFiles, emptyFiles, plainFiles, jsonStr,
 } from '../__fixtures__/expected.file.js';
