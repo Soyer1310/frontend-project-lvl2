@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 
-export default (content, format) => {
-  switch (format) {
+export default (content, extention) => {
+  switch (extention) {
     case '.json':
       return JSON.parse(content);
 
@@ -10,6 +10,6 @@ export default (content, format) => {
       return yaml.load(content);
 
     default:
-      return null;
+      throw new Error(`Unknown extention: '${extention}'!`);
   }
 };
