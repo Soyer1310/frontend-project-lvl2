@@ -15,9 +15,9 @@ const stylish = (diff, spacesCount = 2) => {
       return `${currentIndent}  ${key}: ${stylish(value.value, spacesCount + 4)}`;
     } if (value.type === 'different') {
       return `${currentIndent}- ${key}: ${stylish(value.deleted, spacesCount + 4)}\n${currentIndent}+ ${key}: ${stylish(value.added, spacesCount + 4)}`;
-    } if (value.type === 'first') {
+    } if (value.type === 'deleted') {
       return `${currentIndent}- ${key}: ${stylish(value.deleted, spacesCount + 4)}`;
-    } if (value.type === 'second') {
+    } if (value.type === 'added') {
       return `${currentIndent}+ ${key}: ${stylish(value.added, spacesCount + 4)}`;
     }
     return `${currentIndent}  ${key}: ${stylish(value, spacesCount + 4)}`;
