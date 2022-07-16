@@ -26,7 +26,7 @@ describe('JSON tests', () => {
     expect(diff).toEqual(emptyFiles);
   });
 
-  test('gendiff JSONs (plain formatter) ', () => {
+  test('gendiff JSONs (plain formatter)', () => {
     const diff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain');
     expect(diff).toEqual(plainFiles);
   });
