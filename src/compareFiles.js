@@ -9,25 +9,28 @@ const compareFiles = (file1, file2) => {
     const value1 = file1[key];
     const value2 = file2[key];
     const node = {};
-    if (_.has(file1, key) && _.has(file2, key)) {
-      if (value1 === value2) {
-        node.type = 'same';
-        node.value = value1;
-      } else {
-        node.type = 'different';
-        node.deleted = value1;
-        node.added = value2;
-      }
-    }
-    if (_.has(file1, key) && !_.has(file2, key)) {
-      node.type = 'first';
+
+    if (value1 === value2) {
+      node.type = 'same';
+      node.value = value1;
+    } else if (_.has(file1, key) && _.has(file2, key)) {
+      node.type = 'different';
       node.deleted = value1;
-    } else if (!_.has(file1, key) && _.has(file2, key)) {
-      node.type = 'second';
       node.added = value2;
     }
-    if (_.isObject(value1) && _.isObject(value2)) {
+
+    if (_.has(file1, key) && !_.has(file2, key)) {
+      node.type = 'deleted';
+      node.deleted = value1;
+    } else if (!_.has(file1, key) && _.has(file2, key)) {
+      node.type = 'added';
+      node.added = value2;
+    }
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       node.children = compareFiles(value1, value2);
+    }
+    if (Array.isArray(value1) && Array.isArray(value2)) {
+      node.value = compareFiles(value1, value2);
     }
     result[key] = node;
   });
