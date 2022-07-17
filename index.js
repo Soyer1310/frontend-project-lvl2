@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
+import { cwd } from 'process';
 import parsers from './src/parsers.js';
 import compareFiles from './src/compareFiles.js';
 import formatted from './src/formatters/index.js';
-import { cwd } from 'process';
 
 const readFile = (filePath) => {
   const content = fs.readFileSync(filePath, 'utf8');
