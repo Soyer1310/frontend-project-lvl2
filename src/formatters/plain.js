@@ -33,11 +33,11 @@ const plain = (diff) => {
       }
 
       if (value.type === 'different') {
-        return `\nProperty '${previousKey}${key}' was updated. From ${deleted} to ${added}`;
+        return `Property '${previousKey}${key}' was updated. From ${deleted} to ${added}\n`;
       } if (value.type === 'deleted') {
-        return `\nProperty '${previousKey}${key}' was removed`;
+        return `Property '${previousKey}${key}' was removed\n`;
       } if (value.type === 'added') {
-        return `\nProperty '${previousKey}${key}' was added with value: ${added}`;
+        return `Property '${previousKey}${key}' was added with value: ${added}\n`;
       }
       return null;
     });
