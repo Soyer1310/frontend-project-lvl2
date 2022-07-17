@@ -4,7 +4,7 @@ import toJson from './json.js';
 
 export default (diff, format) => {
   let formatedDiff = diff;
-  if (format === 'stylish') {
+  if (format === 'stylish' || !format) {
     formatedDiff = stylish(diff);
   } else if (format === 'plain') {
     formatedDiff = plain(diff);
