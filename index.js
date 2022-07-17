@@ -25,6 +25,10 @@ export default (filepath1, filepath2, format) => {
   if (_.isObject(format)) {
     currentFormat = format.format;
   }
-  const formatedDiff = formatted(diff, currentFormat);
+  let formatedDiff = formatted(diff, currentFormat);
+  const lastChar = formatedDiff[formatedDiff.length - 1];
+  if (lastChar === '\n') {
+    formatedDiff = formatedDiff.slice(0, formatedDiff.length - 1);
+  }
   return formatedDiff;
 };
