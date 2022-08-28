@@ -2,42 +2,34 @@ import _ from 'lodash';
 
 const plain = (diff) => {
   const iter = (node, previousKey) => {
-    const lines = Object.entries(node).map((item) => {
-      const [key, value] = item;
-      if (value.children) {
-        let nextKey;
+    const lines = node.map((item) => {
+      if (item.type === 'nested') {
         if (previousKey === '') {
-          nextKey = `${key}.`;
-        } else {
-          nextKey = `${previousKey}${key}.`;
+          return iter(item.children, item.name);
         }
-        return iter(value.children, nextKey);
+        return iter(item.children, `${previousKey}.${item.name}`);
+      }
+      const key = item.name;
+      const isDeletedString = (typeof item.deleted === 'string') ? `'${item.deleted}'` : item.deleted;
+      const deleted = (_.isObject(item.deleted)) ? '[complex value]' : isDeletedString;
+      const isAddedString = (typeof item.added === 'string') ? `'${item.added}'` : item.added;
+      const added = (_.isObject(item.added)) ? '[complex value]' : isAddedString;
+      if (item.type === 'changed') {
+        return `Property '${previousKey}.${key}' was updated. From ${deleted} to ${added}\n`;
       }
 
-      let { deleted } = value;
-      if (typeof deleted === 'string') {
-        deleted = `'${deleted}'`;
+      if (item.type === 'deleted' && previousKey !== '') {
+        return `Property '${previousKey}.${key}' was removed\n`;
+      }
+      if (item.type === 'deleted') {
+        return `Property '${key}' was removed\n`;
       }
 
-      if (_.isObject(deleted)) {
-        deleted = '[complex value]';
+      if (item.type === 'added' && previousKey !== '') {
+        return `Property '${previousKey}.${key}' was added with value: ${added}\n`;
       }
-
-      let { added } = value;
-      if (typeof added === 'string') {
-        added = `'${added}'`;
-      }
-
-      if (_.isObject(added)) {
-        added = '[complex value]';
-      }
-
-      if (value.type === 'different') {
-        return `Property '${previousKey}${key}' was updated. From ${deleted} to ${added}\n`;
-      } if (value.type === 'deleted') {
-        return `Property '${previousKey}${key}' was removed\n`;
-      } if (value.type === 'added') {
-        return `Property '${previousKey}${key}' was added with value: ${added}\n`;
+      if (item.type === 'added') {
+        return `Property '${key}' was added with value: ${added}\n`;
       }
       return null;
     });

@@ -3,14 +3,14 @@ import plain from './plain.js';
 import toJson from './json.js';
 
 export default (diff, format) => {
-  let formatedDiff = diff;
   if (format === 'stylish' || !format) {
-    formatedDiff = stylish(diff);
-  } else if (format === 'plain') {
-    formatedDiff = plain(diff);
-  } else if (format === 'json') {
-    formatedDiff = toJson(diff);
+    return stylish(diff);
   }
-
-  return formatedDiff;
+  if (format === 'plain') {
+    return plain(diff);
+  }
+  if (format === 'json') {
+    return toJson(diff);
+  }
+  return diff;
 };
