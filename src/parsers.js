@@ -1,15 +1,13 @@
 import yaml from 'js-yaml';
-import path from 'path';
 
-export default (content, filename) => {
-  const dataType = path.extname(filename).slice(1);
+export default (data, dataType) => {
   switch (dataType) {
     case 'json':
-      return JSON.parse(content);
+      return JSON.parse(data);
 
     case 'yaml':
     case 'yml':
-      return yaml.load(content);
+      return yaml.load(data);
 
     default:
       throw new Error(`Unknown file type: '${dataType}'!`);

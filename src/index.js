@@ -4,9 +4,10 @@ import parsers from './parsers.js';
 import compareFiles from './compareFiles.js';
 import formatted from './formatters/index.js';
 
-const getContent = (filePath) => {
-  const content = fs.readFileSync(filePath, 'utf8');
-  return parsers(content, filePath);
+const getData = (filePath) => {
+  const data = fs.readFileSync(filePath, 'utf8');
+  const dataType = path.extname(filePath).slice(1);
+  return parsers(data, dataType);
 };
 
 const genPath = (processedPath) => {
@@ -15,8 +16,8 @@ const genPath = (processedPath) => {
 };
 
 export default (filepath1, filepath2, format) => {
-  const file1 = getContent(genPath(filepath1));
-  const file2 = getContent(genPath(filepath2));
+  const file1 = getData(genPath(filepath1));
+  const file2 = getData(genPath(filepath2));
   const diff = compareFiles(file1, file2);
   const formatedDiff = formatted(diff, format);
   const lastChar = formatedDiff[formatedDiff.length - 1];
