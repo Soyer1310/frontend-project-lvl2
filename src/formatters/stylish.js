@@ -1,15 +1,45 @@
 import _ from 'lodash';
 
-const stylish = (diff, spacesCount = 2) => {
-  const creatObj = (obj) => {
-    if (!_.isPlainObject(obj)) {
-      return obj;
+const stringify = (obj, depth, spacesCount = 4) => {
+  if (!_.isPlainObject(obj)) {
+    return obj;
+  }
+  const currentIndent = ' '.repeat(spacesCount * depth);
+  const bracketIndent = ' '.repeat(spacesCount * depth - spacesCount);
+  const lines = Object.entries(obj).map((node) => {
+    const [key, value] = node;
+    return `${currentIndent}${key}: ${stringify(value, depth + 1)}`;
+  });
+  return [
+    '{',
+    ...lines,
+    `${bracketIndent}}`,
+  ].join('\n');
+};
+
+const stylish = (diff, spacesCount = 4) => {
+  const iter = (value, depth) => {
+    if (!_.isArray(value) && !_.isPlainObject(value)) {
+      return value;
     }
-    const currentIndent = ' '.repeat(spacesCount);
-    const bracketIndent = ' '.repeat(spacesCount - 2);
-    const lines = Object.entries(obj).map((node) => {
-      const [key, value] = node;
-      return `${currentIndent}  ${key}: ${stylish(value, spacesCount + 4)}`;
+    const currentIndent = ' '.repeat(spacesCount * depth);
+    const specialIndent = ' '.repeat(spacesCount * depth - 2);
+    const bracketIndent = ' '.repeat(spacesCount * depth - spacesCount);
+    const lines = value.map((node) => {
+      const key = node.name;
+      if (node.type === 'nested') {
+        return `${currentIndent}${key}: ${iter(node.children, depth + 1)}`;
+      }
+      if (node.type === 'unchanged') {
+        return `${currentIndent}${key}: ${stringify(node.value, depth + 1)}`;
+      } if (node.type === 'changed') {
+        return `${specialIndent}- ${key}: ${stringify(node.deleted, depth + 1)}\n${specialIndent}+ ${key}: ${stringify(node.added, depth + 1)}`;
+      } if (node.type === 'deleted') {
+        return `${specialIndent}- ${key}: ${stringify(node.deleted, depth + 1)}`;
+      } if (node.type === 'added') {
+        return `${specialIndent}+ ${key}: ${stringify(node.added, depth + 1)}`;
+      }
+      return `${currentIndent}  ${key}: ${stringify(node, depth + 1)}`;
     });
     return [
       '{',
@@ -17,35 +47,7 @@ const stylish = (diff, spacesCount = 2) => {
       `${bracketIndent}}`,
     ].join('\n');
   };
-  if (!_.isArray(diff) && !_.isPlainObject(diff)) {
-    return diff;
-  }
-  if (_.isPlainObject(diff)) {
-    return creatObj(diff, spacesCount);
-  }
-  const currentIndent = ' '.repeat(spacesCount);
-  const bracketIndent = ' '.repeat(spacesCount - 2);
-  const lines = diff.map((node) => {
-    const key = node.name;
-    if (node.type === 'nested') {
-      return `${currentIndent}  ${key}: ${stylish(node.children, spacesCount + 4)}`;
-    }
-    if (node.type === 'unchanged') {
-      return `${currentIndent}  ${key}: ${stylish(node.value, spacesCount + 4)}`;
-    } if (node.type === 'changed') {
-      return `${currentIndent}- ${key}: ${stylish(node.deleted, spacesCount + 4)}\n${currentIndent}+ ${key}: ${stylish(node.added, spacesCount + 4)}`;
-    } if (node.type === 'deleted') {
-      return `${currentIndent}- ${key}: ${stylish(node.deleted, spacesCount + 4)}`;
-    } if (node.type === 'added') {
-      return `${currentIndent}+ ${key}: ${stylish(node.added, spacesCount + 4)}`;
-    }
-    return `${currentIndent}  ${key}: ${stylish(node, spacesCount + 4)}`;
-  });
-  return [
-    '{',
-    ...lines,
-    `${bracketIndent}}`,
-  ].join('\n');
+  return iter(diff, 1);
 };
 
 export default stylish;
