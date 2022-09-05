@@ -12,5 +12,5 @@ export default (diff, format) => {
   if (format === 'json') {
     return toJson(diff);
   }
-  return diff;
+  throw new Error(`Unknown format: '${format}'!`);
 };
