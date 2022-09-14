@@ -1,14 +1,16 @@
 import _ from 'lodash';
 
+const genIndent = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount - 2);
+
 const stringify = (obj, depth, spacesCount = 4) => {
   if (!_.isPlainObject(obj)) {
     return obj;
   }
-  const currentIndent = ' '.repeat(spacesCount * depth);
-  const bracketIndent = ' '.repeat(spacesCount * depth - spacesCount);
+  const indent = genIndent(depth);
+  const bracketIndent = ' '.repeat(spacesCount * (depth - 1));
   const lines = Object.entries(obj).map((node) => {
     const [key, value] = node;
-    return `${currentIndent}${key}: ${stringify(value, depth + 1)}`;
+    return `  ${indent}${key}: ${stringify(value, depth + 1)}`;
   });
   return [
     '{',
@@ -22,7 +24,7 @@ const stylish = (diff, spacesCount = 4) => {
     if (!_.isArray(value) && !_.isPlainObject(value)) {
       return value;
     }
-    const indent = ' '.repeat(spacesCount * depth - 2);
+    const indent = genIndent(depth);
     const bracketIndent = ' '.repeat(spacesCount * (depth - 1));
     const lines = value.map((node) => {
       const key = node.name;
@@ -38,7 +40,7 @@ const stylish = (diff, spacesCount = 4) => {
       } if (node.type === 'added') {
         return `${indent}+ ${key}: ${stringify(node.added, depth + 1)}`;
       }
-      return `  ${indent}  ${key}: ${stringify(node, depth + 1)}`;
+      throw new Error(`Unknown type: '${node.type}'!`);
     });
     return [
       '{',
