@@ -23,7 +23,7 @@ const stylish = (diff, spacesCount = 4) => {
       return value;
     }
     const indent = ' '.repeat(spacesCount * depth - 2);
-    const bracketIndent = ' '.repeat(spacesCount * depth - spacesCount);
+    const bracketIndent = ' '.repeat(spacesCount * (depth - 1));
     const lines = value.map((node) => {
       const key = node.name;
       if (node.type === 'nested') {
