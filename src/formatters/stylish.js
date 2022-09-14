@@ -22,24 +22,23 @@ const stylish = (diff, spacesCount = 4) => {
     if (!_.isArray(value) && !_.isPlainObject(value)) {
       return value;
     }
-    const currentIndent = ' '.repeat(spacesCount * depth);
-    const specialIndent = ' '.repeat(spacesCount * depth - 2);
+    const indent = ' '.repeat(spacesCount * depth - 2);
     const bracketIndent = ' '.repeat(spacesCount * depth - spacesCount);
     const lines = value.map((node) => {
       const key = node.name;
       if (node.type === 'nested') {
-        return `${currentIndent}${key}: ${iter(node.children, depth + 1)}`;
+        return `  ${indent}${key}: ${iter(node.children, depth + 1)}`;
       }
       if (node.type === 'unchanged') {
-        return `${currentIndent}${key}: ${stringify(node.value, depth + 1)}`;
+        return `  ${indent}${key}: ${stringify(node.value, depth + 1)}`;
       } if (node.type === 'changed') {
-        return `${specialIndent}- ${key}: ${stringify(node.deleted, depth + 1)}\n${specialIndent}+ ${key}: ${stringify(node.added, depth + 1)}`;
+        return `${indent}- ${key}: ${stringify(node.deleted, depth + 1)}\n${indent}+ ${key}: ${stringify(node.added, depth + 1)}`;
       } if (node.type === 'deleted') {
-        return `${specialIndent}- ${key}: ${stringify(node.deleted, depth + 1)}`;
+        return `${indent}- ${key}: ${stringify(node.deleted, depth + 1)}`;
       } if (node.type === 'added') {
-        return `${specialIndent}+ ${key}: ${stringify(node.added, depth + 1)}`;
+        return `${indent}+ ${key}: ${stringify(node.added, depth + 1)}`;
       }
-      return `${currentIndent}  ${key}: ${stringify(node, depth + 1)}`;
+      return `  ${indent}  ${key}: ${stringify(node, depth + 1)}`;
     });
     return [
       '{',
