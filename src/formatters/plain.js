@@ -45,7 +45,8 @@ const plain = (diff) => {
       ...lines,
     ].join('');
   };
-  return iter(diff, '');
+  const result = iter(diff, '');
+  return result.slice(0, result.length - 1);
 };
 
 export default plain;
