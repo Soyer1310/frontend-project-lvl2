@@ -20,9 +20,5 @@ export default (filepath1, filepath2, format) => {
   const data2 = getData(genPath(filepath2));
   const diff = compareData(data1, data2);
   const formatedDiff = formatted(diff, format);
-  const lastChar = formatedDiff[formatedDiff.length - 1];
-  if (lastChar === '\n') {
-    return formatedDiff.slice(0, formatedDiff.length - 1);
-  }
   return formatedDiff;
 };
