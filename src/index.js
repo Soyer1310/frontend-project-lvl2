@@ -15,7 +15,7 @@ const genPath = (processedPath) => {
   return path.resolve(currentDir, processedPath);
 };
 
-export default (filepath1, filepath2, format) => {
+export default (filepath1, filepath2, format = 'stylish') => {
   const data1 = getData(genPath(filepath1));
   const data2 = getData(genPath(filepath2));
   const diff = compareData(data1, data2);
