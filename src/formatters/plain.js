@@ -15,29 +15,18 @@ const stringify = (value) => {
 const plain = (diff) => {
   const iter = (node, previousKey) => {
     const lines = node.map((item) => {
+      const key = `${previousKey}${item.name}`;
       if (item.type === 'nested') {
-        if (previousKey === '') {
-          return iter(item.children, item.name);
-        }
-        return iter(item.children, `${previousKey}.${item.name}`);
+        return iter(item.children, `${key}.`);
       }
-      const key = item.name;
       if (item.type === 'changed') {
-        return `Property '${previousKey}.${key}' was updated. From ${stringify(item.deleted)} to ${stringify(item.added)}\n`;
-      }
-
-      if (item.type === 'deleted' && previousKey !== '') {
-        return `Property '${previousKey}.${key}' was removed\n`;
+        return `Property '${previousKey}${item.name}' was updated. From ${stringify(item.deleted)} to ${stringify(item.added)}\n`;
       }
       if (item.type === 'deleted') {
-        return `Property '${key}' was removed\n`;
-      }
-
-      if (item.type === 'added' && previousKey !== '') {
-        return `Property '${previousKey}.${key}' was added with value: ${stringify(item.added)}\n`;
+        return `Property '${previousKey}${item.name}' was removed\n`;
       }
       if (item.type === 'added') {
-        return `Property '${key}' was added with value: ${stringify(item.added)}\n`;
+        return `Property '${previousKey}${item.name}' was added with value: ${stringify(item.added)}\n`;
       }
       return null;
     });
