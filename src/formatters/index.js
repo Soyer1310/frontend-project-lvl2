@@ -3,7 +3,7 @@ import plain from './plain.js';
 import toJson from './json.js';
 
 export default (diff, format) => {
-  if (format === 'stylish' || !format) {
+  if (format === 'stylish') {
     return stylish(diff);
   }
   if (format === 'plain') {
