@@ -2,13 +2,13 @@ import _ from 'lodash';
 
 const genIndent = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount - 2);
 
-const stringify = (obj, depth, spacesCount = 4) => {
-  if (!_.isPlainObject(obj)) {
-    return obj;
+const stringify = (data, depth, spacesCount = 4) => {
+  if (!_.isPlainObject(data)) {
+    return data;
   }
   const indent = genIndent(depth);
   const bracketIndent = ' '.repeat(spacesCount * (depth - 1));
-  const lines = Object.entries(obj).map((node) => {
+  const lines = Object.entries(data).map((node) => {
     const [key, value] = node;
     return `  ${indent}${key}: ${stringify(value, depth + 1)}`;
   });
