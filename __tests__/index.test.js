@@ -13,6 +13,11 @@ const plain = readFile('plain.txt');
 const json = readFile('json.txt');
 
 describe('JSON tests', () => {
+  test('gendiff with two defferent JSONs (default formatter)', () => {
+    const diff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
+    expect(diff).toEqual(stylish);
+  });
+
   test('gendiff with two defferent JSONs (stylish formatter)', () => {
     const diff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish');
     expect(diff).toEqual(stylish);
@@ -30,6 +35,11 @@ describe('JSON tests', () => {
 });
 
 describe('YAML tests', () => {
+  test('gendiff of two defferent YAML (default formatter)', () => {
+    const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'));
+    expect(diff).toEqual(stylish);
+  });
+
   test('gendiff of two defferent YAML (stylish formatter)', () => {
     const diff = genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'), 'stylish');
     expect(diff).toEqual(stylish);
